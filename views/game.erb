@@ -1,0 +1,29 @@
+
+<style>
+li{
+  list-style-type: none;
+}
+
+</style>
+
+<h4>Dealers Hand </h4>
+<% session[:dealer_hand].each do |card| %> 
+  <li> <%= card.to_s %></li> 
+    <% end %><br>
+
+<h4><%=session[:name]%>'s Hand </h4>
+<%session[:player_hand].each do |card| %> 
+<li> 
+    <%= card.to_s %>
+</li> 
+  <%end%>
+  TOTAL: <%=calculate_total(session[:player_hand]) %>
+<% if @show_hit_stay %>
+<form action = '/game/player/hit' method= 'post'>
+<input type='submit' value='Hit!'>
+</form>
+
+<form action = '/game/player/stay' method= 'post'>
+<input type='submit' value='Stay!'>
+</form>
+<% end %>
