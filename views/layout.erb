@@ -6,26 +6,19 @@
     <link rel="stylesheet" href="/application.css">
   </head>
   <body style="padding-top: 50px;">
+<div class= "nav"
+<nav class="navbar navbar-default navbar-fixed-top">
+      <a class="navbar-brand" href="/">New Game</a>
+<!-- <div class="container new_game"> -->
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-            <ul class="nav">
-              <li><a href="/">Nav Item</a></li>
-            </ul>
-        </div>
-      </div>
-    </div>
-
-  <div class="container">
     <%if @error %>
-      <div class="alert alert-error"><%=@error%></div>
+      <div class="alert alert-danger"><%=@error%></div>
     <% end %>
     <%if @success %>
       <div class="alert alert-success"><%=@success%></div>
     <% end %>
       <%= yield %>
-  </div>
+
 
 
   </body>
