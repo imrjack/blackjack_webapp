@@ -71,9 +71,8 @@ get '/game' do
 end
 
 post '/game/player/hit' do 
-    @show_hit_stay =true
-
-    session[:player_hand] <<session[:deck].pop
+  @show_hit_stay =true
+  session[:player_hand] <<session[:deck].pop
     if win?(session[:player_hand])
       @show_hit_stay = false
     end
@@ -82,11 +81,11 @@ post '/game/player/hit' do
       @error = session[:name] + " Busted!"
       @show_hit_stay = false
     end  
-    erb :game
+  erb :game
 end
 
 post '/game/player/stay' do
-    @show_hit_stay =true
+  @show_hit_stay =true
 
   if calculate_total(session[:player_hand]) > 21
     @error = session[:name] + ' Busted!'
