@@ -5,13 +5,12 @@
     <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/application.css">
   </head>
+  <ul class="nav nav-pills">
+  <li role="presentation" class="active"><a href="/">New Game</a></li>
+</ul
   <body style="padding-top: 50px;">
-<div class= "nav"
-<nav class="navbar navbar-default navbar-fixed-top">
-      <a class="navbar-brand" href="/">New Game</a>
-<!-- <div class="container new_game"> -->
-
-    <%if @error %>
+  
+  <%if @error %>
       <div class="alert alert-danger"><%=@error%></div>
     <% end %>
     <%if @success %>
