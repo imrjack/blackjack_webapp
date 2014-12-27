@@ -1,0 +1,60 @@
+img.card_image{
+  margin-right: 10px;
+  float: right;
+}
+
+/*form#stay_button{
+  float: right;
+}
+
+form#hit_button{
+  float: right;
+}
+*/
+
+.btn-lg{
+  border-radius: 10px;
+  float:right;
+  margin-top: 10px;
+  background: #C8C8C8;
+  width:15%;
+}
+.btn-warning{
+  position:absolute;
+  right: 300px;
+  bottom:200px;
+ }
+.btn-success {
+  position:absolute;
+  right: 301px;
+  bottom:140px;
+  padding-right:30px;
+
+}
+.btn-lg{
+    text-align: center;
+    font-style: black;
+}
+
+.btn{
+  margin-top: 10px;
+}
+
+.navbar{
+  position: fixed;
+  height:10%;
+}
+
+.well-lg {
+  background: white;
+
+  margin-top: 100px;
+  padding-bottom: 100px;
+}
+
+/*.game{
+
+  margin-top: 60px;
+  float:left;
+  width:100%;
+}*/
