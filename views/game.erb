@@ -30,11 +30,20 @@ DEALER TOTAL: <%=calculate_total(session[:dealer_hand]) %>
 <form id='hit_button' action = '/game/player/hit' method= 'post'>
 <input type='submit' class= "btn-success btn-lg" value='Hit!'>
 </form>
-
 <form id='stay_button' action = '/game/player/stay' method= 'post'>
 <input type='submit' class= "btn-warning btn-lg" value='Stay!'>
 </form>
-<% end %>
+  <% end %>
+<%if @show_hit_stay ==false && @player_stay == true %>
+  <form id='game_button' action = '/game' method= 'get'>
+  <input type='submit' class= "btn-success btn-lg" value='Another Round!'>
+  </form>
+<div class='bet_form'>
+
+</div>
+
+<%end%>
+
 </div>
 </div>
   TOTAL: <%=calculate_total(session[:player_hand]) %>
