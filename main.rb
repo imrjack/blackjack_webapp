@@ -2,6 +2,7 @@ require 'rubygems'
 require 'sinatra'
 
 set :sessions, true
+set :protection, :except => [:json_csrf]
 
 helpers do 
 
