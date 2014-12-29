@@ -11,7 +11,27 @@ form#hit_button{
   float: right;
 }
 */
+body{ 
+  background-color: #990033;
+}
 
+h1{
+  width:300px;
+}
+
+h3{
+  font-weight: bold;
+  color:white;
+  width:400px;
+}
+
+h4{
+  color:white;
+}
+.btn-default{
+  width:169px;
+  background: #fff;
+}
 .btn-lg{
   border-radius: 10px;
   float:right;
@@ -21,19 +41,15 @@ form#hit_button{
 }
 .btn-warning{
   position:absolute;
-  right: 300px;
+  right: 100px;
   bottom:200px;
  }
 .btn-success {
   position:absolute;
-  right: 301px;
+  right: 101px;
   bottom:140px;
   padding-right:30px;
 
-}
-.btn-lg{
-    text-align: center;
-    font-style: black;
 }
 
 .btn{
@@ -45,27 +61,80 @@ form#hit_button{
   height:10%;
 }
 */
+
+.well {
+  background-color: #006633
+}
 .well-lg {
   background: white;
   margin-top: 100px;
   padding-bottom: 100px;
 }
-
+a.navbar-player{
+  color:white;
+  font-style:bold;
+  font-size: 20px;
+  margin-left: -10px;
+}
 .navbar-header{
-  padding-left:600px;
+  padding:0;
+  padding-bottom: 10px;
+  color:none;
+  background-color: #990033;
+  border-radius: 0px;
+}
+
+a{
+  text-decoration: none;
+  color:black;
 }
 
  .center-block{ 
   display: block;
   margin-left:550px;
   margin-right: 550px;
+  width:1000px;
 }
 
-.game_button{
-  position:absolute;
-  right: 301px;
-  bottom:140px;
-  padding-right:30px;
+/*
+.bet-well{
+  padding: 100px;
+}*/
 
+
+/*.form-bet{
+  padding-left:500px;
+  padding-top: 40px;
+  
+}*/
+.spacer10 { height: 250px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+
+.bank{
+  background-color: #006633;
+  color: white;
+}
+
+.bet{
+  position:absolute;
+  width:200px;
+  height:200px;
+  background-color: #006633;
+  left:1200px; 
+}
+
+.form-bet{
+  position:absolute;
+  right:35px;
+ }
+.play-again{
+  width:200px;
+  position:absolute;
+  left:1200px;
+  bottom:180px;
+}
+
+.bet-again{
+  position:absolute;
+  right:35px;
 
 }

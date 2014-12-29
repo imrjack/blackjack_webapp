@@ -1,0 +1,30 @@
+
+<div class = "game">
+<div class="well bet-well">
+<h4>Dealers Hand </h4>
+<div class="row">
+<div class="span4">
+<!-- empty has no content per se, but using spacer to prevent collapse -->
+<div class="spacer10"></div>
+</div>
+</div>
+</div>
+
+
+<div class="well bet-well">
+<h4><%=session[:name]%>'s Hand </h4>
+    <div class="row">
+      <div class="span4">
+        <div class= 'container bet'>
+            <h4>You have $<%=session[:money]%><br>
+              How much would you like to bet?</h4>
+            <form class = "form-bet" action= '/bet' method = 'post'>
+              <input type= "number" name= "bet" placeholder="$5 minimum"><br>
+              <input type= "submit" value="Bet!" class= 'btn btn-default' role="button">
+            </form>
+</div>
+<div class="spacer10"></div>
+</div>
+</div>
+</div>
+</div>
