@@ -1,28 +1,38 @@
+<div class = 'container-fluid game'>
+<div class="container" id="">
+<%if @player_stay !=true %>
+<h4>Dealer's Hand:</h4>
+<%else %>
+ <h4>Dealer's Hand: <%=calculate_total(session[:dealer_hand]) %></h4>
+<%end%> 
 
-<div class="well">
-<div>
-<h4>Dealer's Hand:<%if @player_stay == true %><%=calculate_total(session[:dealer_hand]) %> </h4>
-  <%end%>
+<div class="well well-cards"> 
+<% session[:dealer_hand].each_with_index do |card,i| %>
+  <%if session[:turn]!= 'dealer' && i ==0%>
+  <img src= "/images/cards/cover.jpg" class='cards'>
+  <%else%>
+  <img src="/images/cards/<%=card[0]%>_<%=card[1]%>.jpg"class="cards">
+
+<% end %>
+<% end %>
+
+
   </div>
-  <% session[:dealer_hand].each do |card| %>
-    <%if @player_stay == true%> 
-      <%= view_cards(card)%>
-    <%else%>
-      <%= view_cards(session[:dealer_hand][0])%>
-      "<img src='/images/cards/cover.jpg'>"
-      <%break%>
-  <!--    <%binding.pry%> -->
-    <% end %>
-  <% end %><br>
 </div>
 
- 
-<div class="well">
-<h4><%=session[:name]%>'s Hand: <%=calculate_total(session[:player_hand])%> </h4>
-<% session[:player_hand].each do |card| %>
-  <%=view_cards(card)%>
-<% end %><br>
 
+ <div class="container">
+<h4><%=session[:name]%>'s Hand: <%=calculate_total(session[:player_hand])%> </h4>
+<div class="well well-cards">
+<% session[:player_hand].each do |card| %>
+  <img src="/images/cards/<%=card[0]%>_<%=card[1]%>.jpg" class="cards">
+<% end %>
+
+</div>
+
+ </div>
+
+<div class="buttons">
 <% if @show_hit_stay==true %>
 <form id='hit_button' action = '/game/player/hit' method= 'post'>
 <input type='submit' class= "btn-success btn-lg" value='Hit!'>
@@ -38,14 +48,18 @@
 
 <% end %>
 
+
 <%if @play_again == true%>
-  <div class= "container play-again">
-    <h4>You have $<%=session[:money]%><br>
+  
+    <h4 id= "bet-again">You have $<%=session[:money]%><br>
     How much would you like to bet?</h4>
     <form class = "bet-again" action = "/again" method "post">
     <input type = "number" name= "bet" text value=<%=session[:bet]%>> <br>
-    <input type = "submit" value="Deal Me a New Hand!" class="btn btn-default" role= "button">
+    <input type = "submit" value="Deal Me a New Hand!" class="btn btn-lg " role= "button">
       </form>
-  </div> 
+
 <%end%>
+
+</div>
+</div>
 </div>

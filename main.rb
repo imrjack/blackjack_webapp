@@ -1,14 +1,17 @@
 require 'rubygems'
 require 'sinatra'
+require 'pry'
+# require 'sinatra/contrib/all'
+
 
 set :sessions, true
-set :protection, :except => [:json_csrf]
+
+BLACKJACK = 21
 
 helpers do 
 
   def calculate_total(cards)
     arr = cards.map {|idx| idx[1]}
-
     total = 0
     arr.each do |card|
       if card== 'ace'
@@ -28,12 +31,33 @@ helpers do
   end
 
   def view_cards(hand)
-    "<img src='/images/cards/#{hand[0]}_#{hand[1]}.jpg' class='card_img'>"
+     "<img src='/images/cards/#{hand[0]}_#{hand[1]}.jpg' >"
   end
 
   def win_money
     session[:money]+= (session[:bet] *2)
   end
+
+  def player_lose
+    player_total = calculate_total(session[:player_hand])
+    dealer_total = calculate_total(session[:dealer_hand])
+    if player_total > BLACKJACK
+      @error = session[:name] +" Busted!"
+    elsif dealer_total == BLACKJACK
+      @error = "Dealer has BlackJack! TOO BAD!"
+    else 
+      @error = "Dealer Wins!"
+    end
+  end
+
+  def player_win(msg)
+    if calculate_total(session[:player_hand]) == BLACKJACK
+      @success = "#{session[:name]} has BlackJack! Good job!"
+    else  
+      @success = "#{session[:name]} Wins! #{msg}" 
+    end
+  end
+
 end
       
 
@@ -67,7 +91,7 @@ post '/bet' do
     @error = 'Minimum buy in is $5'
     erb :bet
   else
-    redirect  '/game'
+    redirect '/game'
   end
 end
 # IV USED TO SHOW HIT/STAY BUTTONS AND TO CHECK IF PLAYER STAYED  
@@ -75,7 +99,7 @@ before do
   @show_hit_stay =true
   @player_stay = false
 end
-#DEALS CARDS. PLAYER AUTOMATICALLY WINS IF BLACKJACK
+#DEALS INITIAL CARDS. 
 get '/game' do 
   suit = ['diamonds','hearts','clubs', 'spades']
   face = ['ace','2','3','4','5','6','7','8','9','10','jack','queen','king']
@@ -86,70 +110,72 @@ get '/game' do
   session[:dealer_hand] <<session[:deck].pop
   session[:player_hand] <<session[:deck].pop
   session[:dealer_hand] <<session[:deck].pop
-  session[:hit] = params[:hit]
-  if calculate_total(session[:player_hand]) == 21
-    win_money
-    @success = "Blackjack! #{session[:name]} Wins!! "
+  session[:turn] = 'player'
+  #PLAYER AUTOMATICALLY WINS IF BLACKJACK
+
+  player_total = calculate_total(session[:player_hand])
+  if  player_total == 21
+    player_win("")
     @show_hit_stay = false
     @play_again= true
   end
-  @player_stay = false
   erb :game
-  
 end
 
 post '/game/player/hit' do 
   @show_hit_stay =true
   session[:player_hand] <<session[:deck].pop
-  if calculate_total(session[:player_hand]) > 21
-      @error = session[:name] + " Busted!"
-      @show_hit_stay = false
-      @play_again= true
-    end  
+  player_total = calculate_total(session[:player_hand])
+  if player_total > 21
+    player_lose
+    @show_hit_stay = false
+    @play_again= true
+  end  
   erb :game
 end
 
 post '/game/player/stay' do
-  @show_hit_stay =false
-  if calculate_total(session[:player_hand]) > 21
-    @error = session[:name] + ' Busted!'
-    @play_again= true
-  else
-    @success = 'Player Chose to Stay'
-    @player_stay = true
-    redirect '/game/dealer'
-  end
   erb :game
+  @player_stay =true
+  @show_hit_stay = false
+  @success = 'Player Chose to Stay'
+  redirect '/game/dealer'
 end
 
 get '/game/dealer' do
+  session[:turn] = 'dealer'
   @show_hit_stay =false
   @player_stay = true
-  while true 
-    if calculate_total(session[:dealer_hand]) <  17
+  player_total = calculate_total(session[:player_hand])
+  dealer_total = calculate_total(session[:dealer_hand]) 
+
+    if dealer_total <  17
       session[:dealer_hand] << session[:deck].pop
-    elsif calculate_total(session[:dealer_hand]) > 21
-      win_money
-      @success = "Dealer busted! #{session[:name]} wins!"
-      @play_again= true
-      break
+      redirect '/game/dealer'
+    elsif dealer_total > 21
+      player_win("Dealer Busted!")
+      @play_again = true
     else
       redirect '/game/compare'
     end
-  end
   erb :game
 end
 
 get '/game/compare' do
   @show_hit_stay =false
   @player_stay = true
-  if calculate_total(session[:dealer_hand]) > calculate_total(session[:player_hand])
-    @error = "Dealer Wins. Try again."
+  player_total = calculate_total(session[:player_hand])
+  dealer_total = calculate_total(session[:dealer_hand]) 
+
+  if player_total < dealer_total
+    player_lose
+    @play_again = true
+  elsif player_total > dealer_total
+    player_win(" with a total of #{player_total}.  Good Job!")
     @play_again= true
-  else
-    win_money
-    @success = "#{session[:name]} Wins! Congrats!"
-    @play_again= true
+  else 
+    @success = "It's a Tie!"
+    @play_again = true
   end
   erb :game
 end
