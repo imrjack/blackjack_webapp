@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'pry'
-# require 'sinatra/contrib/all'
+require 'sinatra/contrib/all'
 
 
 set :sessions, true
@@ -31,7 +31,7 @@ helpers do
   end
 
   def view_cards(hand)
-     "<img src='/images/cards/#{hand[0]}_#{hand[1]}.jpg' >"
+     "/images/cards/#{hand[0]}_#{hand[1]}.jpg"
   end
 
   def win_money
@@ -131,16 +131,16 @@ post '/game/player/hit' do
     @show_hit_stay = false
     @play_again= true
   end  
-  erb :game
+  erb :game, layout: false
 end
 
-post '/game/player/stay' do
-  erb :game
-  @player_stay =true
-  @show_hit_stay = false
-  @success = 'Player Chose to Stay'
-  redirect '/game/dealer'
-end
+# post '/game/player/stay' do
+#   erb :game
+#   @player_stay =true
+#   @show_hit_stay = false
+#   @success = 'Player Chose to Stay'
+#   redirect '/game/dealer'
+# end
 
 get '/game/dealer' do
   session[:turn] = 'dealer'
@@ -150,6 +150,7 @@ get '/game/dealer' do
   dealer_total = calculate_total(session[:dealer_hand]) 
 
     if dealer_total <  17
+
       session[:dealer_hand] << session[:deck].pop
       redirect '/game/dealer'
     elsif dealer_total > 21
@@ -158,7 +159,7 @@ get '/game/dealer' do
     else
       redirect '/game/compare'
     end
-  erb :game
+  erb :game,layout: false
 end
 
 get '/game/compare' do
@@ -177,7 +178,7 @@ get '/game/compare' do
     @success = "It's a Tie!"
     @play_again = true
   end
-  erb :game
+  erb :game,layout: false
 end
 
 get '/again' do 

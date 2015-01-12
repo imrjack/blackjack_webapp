@@ -7,6 +7,7 @@ form#hit_button{
   float: right;
 }
 */
+
 body{ 
   background-color: black;
   display: block;
@@ -27,7 +28,7 @@ h4{
   color:white;
   margin-bottom: 1em;
 }
-a.navbar-player{
+#navbar-player{
   color:red;
   font-style:italic;
   font-size:3em;
@@ -39,10 +40,10 @@ a.navbar-player{
 /*  padding-bottom: 5em;*/
 }
 
-a{
+/*a{
   text-decoration: none;
   color:black;
-}
+}*/
 
 .game{
   margin:0em;
@@ -128,8 +129,7 @@ img{
   position:relative;
   height: 8em;
   max-width:8em;
-  border-radius: 3px;
-
+  border-radius: 3px; 
 }
 
 div.buttons{
@@ -164,17 +164,4 @@ div.buttons{
 
 
 
-
-*/*/*/
-
-
-
-
-/*.spacer10 { height: 25em; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
-*/
-/*.bank{
-  background-color: #006633;
-  color: white;
-}
-*/
 
