@@ -11,10 +11,11 @@ function player_hit(){
       url: '/game/player/hit'
       
       }).done(function(msg){
+
       $('#game').replaceWith(msg);
+
     });
-    $(".cards").effect('bounce');
-    return false;
+      return false;
   });
 }
 
@@ -25,6 +26,7 @@ function dealer_hit(){
         url:'/game/dealer'
 
       }).done(function(msg){
+        setTimeout(3000);
         $('#game').replaceWith(msg);
       });
     
