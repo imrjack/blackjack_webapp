@@ -8,10 +8,9 @@ form#hit_button{
 }
 */
 
-body{ 
-  background-color: black;
-  display: block;
-}
+
+
+
 
 h1{
   text-align: center;
@@ -25,7 +24,7 @@ h3{
 }
 
 h4{
-  color:white;
+  color:black;
   margin-bottom: 1em;
 }
 #navbar-player{
@@ -63,7 +62,6 @@ h4{
 }
 
 .container{
-
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
@@ -154,9 +152,14 @@ div.buttons{
   position: relative;
 }
 
+.dealer_hit{
+  margin-top: 4em;
+  padding-top: .05em;
+}
 #bet-again{
   color:black;
 }
+
 /*===============================================
                  BET PAGE
 ===============================================*/

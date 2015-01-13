@@ -7,8 +7,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
     <script type="text/javascript" src="/application.js"></script>
 
@@ -27,15 +25,7 @@
 
 <body>
 
-<%if @error %>
-<div class="alert alert-danger"><%=@error%></div>
-<% end %>
-<%if @success %>
-<div class="alert alert-success"><%=@success%></div>
-<% end %>
-<%if @info%>
-<div  class="alert alert-info"><%=@info%></div>
-<% end %>
+
 <%= yield %>
 
 

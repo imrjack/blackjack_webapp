@@ -134,35 +134,45 @@ post '/game/player/hit' do
   erb :game, layout: false
 end
 
-# post '/game/player/stay' do
-#   erb :game
-#   @player_stay =true
-#   @show_hit_stay = false
-#   @success = 'Player Chose to Stay'
-#   redirect '/game/dealer'
-# end
+post '/game/player/stay' do
+  
+  @player_stay =true
+  @show_hit_stay = false
+  @dealer_hit= true
+  erb :game,layout: false
+end
 
-get '/game/dealer' do
+post '/game/dealer' do
   session[:turn] = 'dealer'
   @show_hit_stay =false
   @player_stay = true
+  @dealer_score = true
   player_total = calculate_total(session[:player_hand])
   dealer_total = calculate_total(session[:dealer_hand]) 
 
     if dealer_total <  17
-
       session[:dealer_hand] << session[:deck].pop
-      redirect '/game/dealer'
+      if dealer_total < 17
+        @dealer_hit = true
+      end
+    # elsif dealer_total >= 17 && dealer_total <=21
+    #   @dealer_hit = false
+    #   @success = 'Dealer chose to stay'
+    #   redirect '/game/compare'
     elsif dealer_total > 21
+      @dealer_hit= false
       player_win("Dealer Busted!")
       @play_again = true
     else
+      @dealer_hit= false
       redirect '/game/compare'
     end
   erb :game,layout: false
 end
 
 get '/game/compare' do
+  @dealer_score = true
+  @dealer_hit = false
   @show_hit_stay =false
   @player_stay = true
   player_total = calculate_total(session[:player_hand])
@@ -181,7 +191,8 @@ get '/game/compare' do
   erb :game,layout: false
 end
 
-get '/again' do 
+get '/again' do
+@dealer_hit = false 
   session[:bet] = params[:bet].to_i
   session[:money] -= session[:bet]
   if session[:bet] < 5

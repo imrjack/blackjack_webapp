@@ -1,18 +1,18 @@
+
 <%if @error %>
-<div class="alert alert-danger"><%=@error%></div>
+<div class="alert alert-danger"><%=@error%></div></ls>
 <% end %>
 <%if @success %>
-<div class="alert alert-success"><%=@success%></div>
+<div class="alert alert-success stay"><%=@success%></div>
 <% end %>
 <%if @info%>
 <div  class="alert alert-info"><%=@info%></div>
 <% end %>
 
 
-
 <div class = 'container-fluid' id = 'game'>
 <div class="container">
-<%if @player_stay !=true %>
+<%if @dealer_score !=true %>
 <h4>Dealer's Hand:</h4>
 <%else %>
  <h4>Dealer's Hand: <%=calculate_total(session[:dealer_hand]) %></h4>
@@ -50,7 +50,7 @@
 <input type='submit' class= "btn-success btn-lg" value='Hit!'>
 </form>
 
-<form id='stay_button' action = '/game/dealer' method= 'post'>
+<form id='stay_button' action = '/game/player/stay' method= 'post'>
 <input type='submit' class= "btn-warning btn-lg" value='Stay!'>
 </form>
 
@@ -59,6 +59,21 @@
 </div>
 
 <% end %>
+
+<% if @dealer_hit == true%>
+<form id='dealer_hit' action = '/game/dealer' method= 'post'>
+<input type='submit' class = 'btn-warning btn-lg dealer_hit' value=
+"<%if dealer_total = calculate_total(session[:dealer_hand])< 17 %>
+See dealers card
+<%elsif dealer_total = calculate_total(session[:dealer_hand])>= 17 %>
+Compare cards
+<% end %>"</form>
+<div class='bank'>
+<h3> You bet $<%=session[:bet]%>. You have $<%=session[:money]%>.</h3>
+</div>
+
+<% end %> 
+
 
 
 <%if @play_again == true%>
@@ -75,3 +90,4 @@
 </div>
 </div>
 </div>
+
