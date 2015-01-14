@@ -10,9 +10,7 @@ function player_hit(){
     $.ajax({
       type:'POST',
       url: '/game/player/hit'
-      
       }).done(function(msg){
-
       $('#game').replaceWith(msg);
 
     });
@@ -25,9 +23,7 @@ function player_stay(){
       $.ajax({
         type:'POST',
         url:'/game/player/stay'
-
       }).done(function(msg){
-        setTimeout(3000);
         $('#game').replaceWith(msg);
       });
     
@@ -38,13 +34,10 @@ function player_stay(){
 
 function dealer_hit(){
     $(document).on('click','#dealer_hit', function(){
-      $('.stay').hide(),
       $.ajax({
-        type:'POST',
+        type:'get',
         url:'/game/dealer'
-
       }).done(function(msg){
-        setTimeout(3000);
         $('#game').replaceWith(msg);
       });
     

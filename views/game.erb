@@ -61,7 +61,7 @@
 <% end %>
 
 <% if @dealer_hit == true%>
-<form id='dealer_hit' action = '/game/dealer' method= 'post'>
+<form id='dealer_hit' action = '/game/dealer' method= 'get'>
 <input type='submit' class = 'btn-warning btn-lg dealer_hit' value=
 "<%if dealer_total = calculate_total(session[:dealer_hand])< 17 %>
 See dealers card

@@ -142,7 +142,7 @@ post '/game/player/stay' do
   erb :game,layout: false
 end
 
-post '/game/dealer' do
+get '/game/dealer' do
   session[:turn] = 'dealer'
   @show_hit_stay =false
   @player_stay = true
@@ -155,10 +155,6 @@ post '/game/dealer' do
       if dealer_total < 17
         @dealer_hit = true
       end
-    # elsif dealer_total >= 17 && dealer_total <=21
-    #   @dealer_hit = false
-    #   @success = 'Dealer chose to stay'
-    #   redirect '/game/compare'
     elsif dealer_total > 21
       @dealer_hit= false
       player_win("Dealer Busted!")
